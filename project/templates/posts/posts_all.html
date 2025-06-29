@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}Список постов{% endblock title %}
+
+{% block content %}
+    {% if posts %}      
+        <h2>Список постов</h2>
+        {% for post in posts %}    
+        <div class='post-container' style='border: 2px solid blue; margin-bottom: 10px; padding: 15px;'>
+            <h2>Заголовок поста: <a href='{% url "post_info" post.id %}'>{{ post.title }}</a></h2>   
+            <p>Текст поста: {{ post.text }}</p>
+            <small>Дата создания: {{ post.created_at|date:"d.m.y" }}</small>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p>Постов ещё нет</p>
+    {% endif %}
+{% endblock content %}

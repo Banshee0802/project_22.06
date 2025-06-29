@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}{{ post.title }}{% endblock title %}
+
+{% block content %}
+    <a href='{% url "posts_all" %}'>&larr;Назад</a>
+    <h1>Детали поста</h1>
+    <h2>Идентификатор поста: {{ post.id }}</h2>
+    <p>{{ post.title }}</p>
+    <p>{{ post.text }}</p>
+    <p>{{ post.created_at }}</p>
+{% endblock content %}

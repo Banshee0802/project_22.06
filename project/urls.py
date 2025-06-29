@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import home_view
+from .views import home_view, post_info, get_post_list
 
 from . import views
 
@@ -10,4 +10,6 @@ urlpatterns = [
     path('content/', views.content, name='content'),
     path('contact/', views.contact, name='contact'),
     path('about/', views.about, name='about'),
+    path('posts/<int:id>/', post_info, name='post_info'),
+    path('posts/', get_post_list, name='posts_all')
 ]
