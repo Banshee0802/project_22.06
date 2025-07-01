@@ -1,12 +1,43 @@
-{% extends "base.html" %}
+{% extends "base.html" %} 
 
 {% block title %}{{ post.title }}{% endblock title %}
 
 {% block content %}
-    <a href='{% url "posts_all" %}'>&larr;Назад</a>
-    <h1>Детали поста</h1>
-    <h2>Идентификатор поста: {{ post.id }}</h2>
-    <p>{{ post.title }}</p>
-    <p>{{ post.text }}</p>
-    <p>{{ post.created_at }}</p>
+<a href='{% url "posts_all" %}'
+  ><button type="button" class="btn btn-primary">&larr;Назад</button></a>
+<div class="card bg-light mb-3">
+  <p class="title">{{ post.title }}</p>
+  <p>{{ post.text }}</p>
+  <small class="created_at">{{ post.created_at|date:"d.m.y" }}</small>
+  <button
+    type="button"
+    class="btn btn-outline-danger btn-tiny"
+    data-bs-toggle="modal"
+    data-bs-target="#deleteModal-{{ post.id }}"
+  >
+    Удалить
+  </button>
+
+  <div class="modal fade" id="deleteModal-{{ post.id }}" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Удалить пост?</h5>
+          <button class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          Вы уверены, что хотите удалить "{{ post.title }}"?
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" data-bs-dismiss="modal">
+            Отмена
+          </button>
+          <a href="{% url 'delete_post' post.id %}" class="btn btn-danger"
+            >Удалить</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock content %}

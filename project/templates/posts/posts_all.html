@@ -1,18 +1,45 @@
-{% extends "base.html" %}
+{% extends "base.html" %} 
+{% load static %} 
 
-{% block title %}Список постов{% endblock title %}
+{% block title %}Список постов{%endblock title %} 
 
 {% block content %}
-    {% if posts %}      
-        <h2>Список постов</h2>
-        {% for post in posts %}    
-        <div class='post-container' style='border: 2px solid blue; margin-bottom: 10px; padding: 15px;'>
-            <h2>Заголовок поста: <a href='{% url "post_info" post.id %}'>{{ post.title }}</a></h2>   
-            <p>Текст поста: {{ post.text }}</p>
-            <small>Дата создания: {{ post.created_at|date:"d.m.y" }}</small>
-        </div>
-        {% endfor %}
-    {% else %}
-        <p>Постов ещё нет</p>
-    {% endif %}
+<div class="d-flex justify-content-end">
+  <button id="myAlertButton" class="btn btn-primary">Нажми меня</button>
+</div>
+{% if posts %}
+<h2 class="text-body-primary">Список постов</h2>
+{% for post in posts %}
+<div class="card bg-light mb-3">
+  <h2><a href='{% url "post_info" post.id %}'>{{ post.title }}</a></h2>
+  <p>{{ post.text }}</p>
+  <small class="created_at">{{ post.created_at|date:"d.m.y" }}</small>
+</div>
+{% endfor %} {% else %}
+<p>Постов ещё нет</p>
+{% endif %}
+<div
+  class="toast-container position-fixed top-0 start-50 translate-middle-x p-3">
+  <div
+    id="liveToast"
+    class="toast"
+    role="alert"
+    aria-live="assertive"
+    aria-atomic="true"
+  >
+    <div class="toast-header bg-primary text-white">
+      <strong class="me-auto">Упс</strong>
+      <button
+        type="button"
+        class="btn-close btn-close-white"
+        data-bs-dismiss="toast"
+        aria-label="Закрыть"
+      ></button>
+    </div>
+    <div class="toast-body">Работает!&#10024;</div>
+  </div>
+</div>
+{% block scripts %}
+<script src="{% static 'js/script.js' %}"></script>
+{% endblock %} 
 {% endblock content %}
