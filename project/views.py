@@ -32,7 +32,7 @@ def get_post_list(request):
 
 def post_info(request, id):
     post = get_object_or_404(Post, id=id)
-    return render(request, 'posts/post_info.html', context={'post': post})
+    return render(request, 'posts/post_info.html', context={'post': post})  
 
 
 @login_required
