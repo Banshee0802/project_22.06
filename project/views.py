@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from .models import Post
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import AuthenticationForm
 
 
 def home_view(request):
@@ -40,3 +41,8 @@ def delete_post(request, id):
     if request.user.is_superuser:
             post.delete()
     return redirect('posts_all')
+
+
+def login_view(request):
+    form = AuthenticationForm()
+    return render(request, 'login.html', {'form': form})
