@@ -9,6 +9,7 @@
   <p class="title">{{ post.title }}</p>
   <p>{{ post.text }}</p>
   <small class="created_at">{{ post.created_at|date:"d.m.y" }}</small>
+  <a href="{% url 'post_update' post.id %}" class="btn-up btn-warning">Редактировать</a>
   <button
     type="button"
     class="btn btn-outline-danger btn-tiny"

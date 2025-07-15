@@ -14,6 +14,7 @@
   <h2><a href='{% url "post_info" post.id %}'>{{ post.title }}</a></h2>
   <p>{{ post.text }}</p>
   <small class="created_at">{{ post.created_at|date:"d.m.y" }}</small>
+  <a href="{% url 'post_update' post.id %}" class="btn-up btn-warning">Редактировать</a>
 </div>
 {% endfor %} {% else %}
 <p>Постов ещё нет</p>
