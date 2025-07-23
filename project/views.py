@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from .models import Post
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
-from .forms import PostUpdateForm
+from .forms import PostForm
 
 
 def home_view(request):
@@ -49,20 +49,40 @@ def login_view(request):
     return render(request, 'login.html', {'form': form})
 
 
-def post_update(request, id):
-    post = get_object_or_404(Post, id=id)
+def create_post(request):
+    title = "Создать пост"
+    submit_button_text = 'Создать'
+
+    if request.method == 'GET':
+        form = PostForm()
+
+        return render(request, 'posts/post_form.html', context={'form': form, 'title': title, 'submit_button_text': submit_button_text})
     
     if request.method == 'POST':
-        form = PostUpdateForm(request.POST)
+        form = PostForm(request.POST)
+
         if form.is_valid():
-            post.title = form.cleaned_data['title']
-            post.text = form.cleaned_data['text']
-            post.save()
-            return redirect('post_info', id=id)
-    else:
-        form = PostUpdateForm(initial={
-            'title': post.title,
-            'text': post.text
-        })
+            post = form.save()
+
+            return redirect('post_info', id=post.id)
+        else:
+            return render(request, 'posts/post_form.html', context={'form': form, 'title': title, 'submit_button_text': submit_button_text})
+
+
+def post_update(request, id):
+    title = 'Редактировать пост'
+    submit_button_text = 'Обновить'
+    post = get_object_or_404(Post, id=id)
+    form = PostForm(instance=post)
     
-    return render(request, 'posts/post_update.html', {'form': form, 'post': post})
+    if request.method == 'POST':
+        form = PostForm(request.POST, instance=post)
+        if form.is_valid():
+            updated_post = form.save()
+            return redirect('post_info', id=updated_post.id)
+    else:
+        return render(request, 'posts/post_form.html', context={'form': form, 'title': title, 'submit_button_text': submit_button_text})
+
+    form = PostForm(instance=post)
+    
+    return render(request, 'posts/post_form.html', context={'form': form, 'title': title, 'submit_button_text': submit_button_text})

@@ -15,6 +15,7 @@
             <div class="card border-primary mb-3" style="max-width: 100%;">
             <div class="card-header">Новости о технологиях</div>
             <a href="{% url 'login' %}">Авторизоваться</a>
+            <a href="{% url 'create_post' %}">Создать пост</a>
         </nav>
     </header>
     <main>{% block content %}{% endblock content %}</main>
