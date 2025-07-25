@@ -86,3 +86,14 @@ def post_update(request, id):
     form = PostForm(instance=post)
     
     return render(request, 'posts/post_form.html', context={'form': form, 'title': title, 'submit_button_text': submit_button_text})
+
+
+def delete_post(request, id):
+    post = get_object_or_404(Post, id=id)
+
+    if request.method == 'POST':
+        post.delete()
+
+        return redirect('posts_all')
+    
+    return render(request, 'posts/post_delete.html', {'post': post})

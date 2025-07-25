@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}{{ title }}{% endblock title %}
 
@@ -8,17 +9,18 @@
     <form method='POST'>
         {% csrf_token %}
 
-        <div class="mb-3">
-            <label class="form-label">{{ form.title.label_tag }}</label>
+        <div>
+            <label class="col-form-label col-form-label-lg mt-4" for="{{ form.title.id_for_label }}">{{ form.title.label_tag }}</label>
             {{ form.title }}
             {{ form.title.errors }}
+            
         </div> 
 
-        <div class="mb-3">
-             <label class="form-label">{{ form.text.label_tag }}</label>
+        <div>
+             <label for="exampleTextarea" class="form-label mt-4">{{ form.text.label_tag }}</label>
             {{ form.text }}
             {{ form.text.errors }}
         </div> 
-        <button type=submit class="btn btn-primary">{{ submit_button_text }}</button>
+        <button type=submit class="btn my-custom-btn">{{ submit_button_text }}</button>
     </form>
 {% endblock content %}

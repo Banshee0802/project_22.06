@@ -7,17 +7,15 @@ class PostForm(forms.ModelForm):
         fields = ['title', 'text']
         widgets = {
             'title': forms.TextInput(attrs={
-                'placeholder': 'Максимальная длина 200 символов'
-            })
+                'class': 'form-control form-control-lg',
+                'placeholder': 'Максимальная длина 200 символов'}),
+            'text': forms.Textarea(attrs={
+                'class': "form-control",
+                'rows': 5,
+        })
         }
         labels = {
             'title': 'Заголовок поста',
             'text': 'Текст поста'
         }
-    def clean_title(self):
-        title = self.cleaned_data['title'].strip()
-        
-        if len(title) < 5:
-            raise forms.ValidationError('Заголовок не должен быть короче 5 символов')
-
-        return title
+    
