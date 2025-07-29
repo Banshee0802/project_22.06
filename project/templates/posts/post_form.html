@@ -1,26 +1,28 @@
 {% extends "base.html" %}
 {% load static %}
 
+
 {% block title %}{{ title }}{% endblock title %}
 
 {% block content %}
-    <h1>{{ title }}</h1>
+<a href='{% url "posts_all" %}' class="btn btn-primary my-3 mx-3">&larr; Назад</a>
+    <h1 class='my-3 mx-3'>{{ title }}</h1>
 
     <form method='POST'>
         {% csrf_token %}
 
         <div>
-            <label class="col-form-label col-form-label-lg mt-4" for="{{ form.title.id_for_label }}">{{ form.title.label_tag }}</label>
-            {{ form.title }}
+            <label class="col-form-label col-form-label-lg my-4 mx-3" for="{{ form.title.id_for_label }}">{{ form.title.label_tag }}</label>
+            <div class='mx-3 w-50'>{{ form.title }}</div>
             {{ form.title.errors }}
             
         </div> 
 
         <div>
-             <label for="exampleTextarea" class="form-label mt-4">{{ form.text.label_tag }}</label>
-            {{ form.text }}
+             <label for="exampleTextarea" class="form-label mt-4 mx-3">{{ form.text.label_tag }}</label>
+            <div class='mx-3 w-50'>{{ form.text }}</div>
             {{ form.text.errors }}
         </div> 
-        <button type=submit class="btn my-custom-btn">{{ submit_button_text }}</button>
+        <button type=submit class="btn btn-primary my-4 mx-3">{{ submit_button_text }}</button>
     </form>
 {% endblock content %}

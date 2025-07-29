@@ -3,32 +3,3 @@
     margin: 0;
     box-sizing: border-box;
 }
-
-.text-body-primary {
-    margin: 1%;
-}
-
-.card {
-    padding: 1%;
-}
-
-.btn {
-    margin: 1%;
-}
-
-.created_at {
-    text-align: end;
-    padding-top: 1%;
-}
-
-.title {
-    font-size: xx-large;
-}
-
-
-.btn-tiny {
-    margin: 2%;
-    max-width: 10%;
-    align-self: end;
-}
-
