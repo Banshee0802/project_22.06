@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h1 class="text-center mb-4">Регистрация</h1>
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                 <button type='submit' class='btn btn-primary'>Создать аккаунт</button>
+    </form>
+</div>
+{% endblock content %}

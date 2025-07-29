@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="alert alert-success">
+        <h2 class='text-center'>Регистрация прошла успешно!</h2>
+        <p class='text-center'>Теперь вы можете <a href="{% url 'login' %}">войти</a> в свой аккаунт.</p>
+    </div>
+</div>
+{% endblock %}

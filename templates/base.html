@@ -16,11 +16,29 @@
                 <div class="navbar-brand">Новости о технологиях</div>
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                <a class="nav-link" href="{% url 'login' %}">Авторизоваться</a>
                     </li>
+                    
+                    {% if request.user.is_authenticated %}
+                    
                     <li class="nav-item">
+                        <a class="nav-link disabled" href='#'>Привет, {{ request.user }}</a>
+                        </li>
+                        <li class="nav-item">
                     <a class="nav-link" href="{% url 'create_post' %}">Создать пост</a>
-                     </li>
+                    </li>
+                         <li class="nav-item position-absolute top-0 end-0 mx-3 my-2">
+                            <a class="nav-link" href='{% url "logout" %}'>Выйти</a>
+                        </li>
+                    {% else %}
+                     <li class="nav-item">
+                        <a class="nav-link" href='{% url "register" %}'>Регистрация</a>
+                    </li>
+                            
+                        <li class="nav-item">
+                            <a class="nav-link" href='{% url "login" %}'>Войти</a>
+                        </li>
+                        {% endif %}
+                    </ul>
             </div>
         </nav>
     </header>
